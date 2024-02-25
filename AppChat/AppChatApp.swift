@@ -11,7 +11,10 @@ import SwiftUI
 struct AppChatApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            NavigationView{
+                AuthView()
+            }
         }
     }
 }
