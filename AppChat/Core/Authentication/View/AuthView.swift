@@ -10,10 +10,12 @@ import SwiftUI
 struct AuthView: View {
     @State private var isLoginMode = true
     @State private var email: String = ""
-    @State private var paswd: String = ""
+    @State private var passwd: String = ""
     @State private var fullName: String = ""
     @State private var repeatPasswd: String = ""
     @State private var sex: Bool = true
+    @State var showImagePicker = false
+    @State var imageSelected: UIImage?
     
     @ObservedObject var authViewModel = AuthViewModel()
     
@@ -42,7 +44,12 @@ struct AuthView: View {
                 }
                 // Button
                 Button {
-                    authViewModel.actionButton(typeButton: isLoginMode)
+                    if isLoginMode {
+                        authViewModel.login(withEmail: email, passwd: passwd)
+                    } else {
+                        authViewModel.signUp(withEmail: email, passwd: passwd, fullName: fullName, image: imageSelected)
+                    }
+                    
                 } label: {
                     HStack{
                         Spacer()
@@ -55,11 +62,17 @@ struct AuthView: View {
                 .background(.blue)
                 .cornerRadius(5)
                 .padding(.vertical, 10)
+                .alert(isPresented: $authViewModel.isShowAler) {
+                    Alert(title: Text("Alert Dialog"), message: Text(authViewModel.statusMessage), dismissButton: .default(Text("OK")))
+                }
             }
             .padding(.horizontal)
         }
         .navigationTitle(isLoginMode ? "Login" : "Create Account")
         .background(.gray.opacity(0.25))
+        .sheet(isPresented: $showImagePicker, onDismiss: nil) {
+            ImagePicker(selectedImage: $imageSelected, showPickerImage: $showImagePicker)
+        }
     }
 }
 
@@ -74,18 +87,31 @@ extension AuthView {
     var inputLogin: some View {
         VStack{
             CustomTextFieldAuthView(text: $email, isSecure: false, iconName: "envelope", placeholder: "Email")
-            CustomTextFieldAuthView(text: $paswd, isSecure: true, iconName: "lock", placeholder: "Password")
+            CustomTextFieldAuthView(text: $passwd, isSecure: true, iconName: "lock", placeholder: "Password")
         }
     }
     var inputSignUp: some View {
         VStack{
-            Image(systemName: "person.circle")
-                .font(.system(size: 65))
-                .padding()
+            Group{
+                if imageSelected != nil {
+                    Image(uiImage: imageSelected!)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 80, height: 80)
+                        .clipShape(Circle())
+                } else {
+                    Image(systemName: "photo.circle")
+                        .font(.system(size: 80))
+                        .padding()
+                }
+            }
+            .onTapGesture {
+                showImagePicker.toggle()
+            }
             
             CustomTextFieldAuthView(text: $fullName, isSecure: false, iconName: "person", placeholder: "Full Name")
             CustomTextFieldAuthView(text: $email, isSecure: false, iconName: "envelope", placeholder: "Email")
-            CustomTextFieldAuthView(text: $paswd, isSecure: true, iconName: "lock", placeholder: "Password")
+            CustomTextFieldAuthView(text: $passwd, isSecure: true, iconName: "lock", placeholder: "Password")
             CustomTextFieldAuthView(text: $repeatPasswd, isSecure: true, iconName: "lock", placeholder: "Repeat Password")
         }
     }
