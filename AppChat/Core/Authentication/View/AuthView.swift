@@ -14,8 +14,10 @@ struct AuthView: View {
     @State private var fullName: String = ""
     @State private var repeatPasswd: String = ""
     @State private var sex: Bool = true
-    @State var showImagePicker = false
-    @State var imageSelected: UIImage?
+    @State private var showImagePicker = false
+    @State private var imageSelected: UIImage?
+    
+    @Binding var isStatusLogin: Bool
     
     @ObservedObject var authViewModel = AuthViewModel()
     
@@ -45,7 +47,11 @@ struct AuthView: View {
                 // Button
                 Button {
                     if isLoginMode {
-                        authViewModel.login(withEmail: email, passwd: passwd)
+                        authViewModel.login(withEmail: email, passwd: passwd) { sucsess in
+                            if sucsess {
+                                isStatusLogin = false
+                            }
+                        }
                     } else {
                         authViewModel.signUp(withEmail: email, passwd: passwd, fullName: fullName, image: imageSelected)
                     }
@@ -79,7 +85,7 @@ struct AuthView: View {
 struct AuthView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
-            AuthView()
+            AuthView(isStatusLogin: .constant(true))
         }
     }
 }

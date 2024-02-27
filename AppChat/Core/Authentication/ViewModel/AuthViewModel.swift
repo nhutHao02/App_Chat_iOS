@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
 import Firebase
 import UIKit
 import FirebaseStorage
+
 class AuthViewModel: ObservableObject {
-    
     @Published var isShowAler = false
     var statusMessage = ""
     
@@ -21,13 +22,15 @@ class AuthViewModel: ObservableObject {
                 self.statusMessage = "Error when create User with bug: \(err)"
                 return
             }
-            self.uploadImageUser(image: image)
+            // uploaf image to Storage Firebase
+            self.uploadImageUser(withEmail: email, passwd: passwd, fullName: fullName, image: image)
+            
             print("Successful create User uid: \(String(describing: result?.user.uid))")
             self.statusMessage = "Successful create User"
             self.isShowAler = true
         }
     }
-    private func uploadImageUser(image: UIImage?) {
+    private func uploadImageUser(withEmail email: String, passwd: String, fullName: String, image: UIImage?) {
         // convert image to data
         guard let imageData = image?.jpegData(compressionQuality: 0.5) else {return}
         
@@ -46,14 +49,35 @@ class AuthViewModel: ObservableObject {
                     return
                 }
                 print("Successfull store image with url: \(String(describing: url))")
+                
+                // save Info user to FireStorage Firebase
+                guard let urlImg = url else {return}
+                self.saveUserInfo(withEmail: email, passwd: passwd, fullName: fullName, url: urlImg.absoluteString)
             }
         }
+    }
+    
+    private func saveUserInfo(withEmail email: String, passwd: String, fullName: String, url: String) {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
         
-        
+        let data: [String: Any] = [
+            "uid": uid,
+            "email": email,
+            "pass": passwd,
+            "fullName": fullName,
+            "urlIMG": url
+        ]
+        Firestore.firestore().collection("users").document(uid).setData(data) { error in
+            if let err = error {
+                print("Error ------- \(err)")
+                return
+            }
+            print("Successful save user to FireStorage")
+        }
         
     }
     
-    func login(withEmail email: String, passwd: String){
+    func login(withEmail email: String, passwd: String, completion: @escaping (Bool) -> Void){
         Auth.auth().signIn(withEmail: email, password: passwd) { result, error in
             if let err = error{
                 self.isShowAler = true
@@ -61,7 +85,9 @@ class AuthViewModel: ObservableObject {
                 return
             }
             print("Successful login with User uid: \(String(describing: result?.user.uid))")
+            completion(true)
         }
     }
+
 }
 

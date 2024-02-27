@@ -23,7 +23,8 @@ struct AppChatApp: App {
         WindowGroup {
 //            ContentView()
             NavigationView{
-                AuthView()
+//                AuthView()
+                MainMessageView()
             }
         }
     }
