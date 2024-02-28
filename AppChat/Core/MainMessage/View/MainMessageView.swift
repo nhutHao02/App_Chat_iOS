@@ -9,12 +9,12 @@ import SwiftUI
 
 struct MainMessageView: View {
     @State var showSignOutOptions = false
+    @State var isShowCreateNewMessage = false
     @ObservedObject var viewModel = MainMessageViewModel()
     var body: some View {
         VStack{
             // custom bar
             customBar
-            
             ScrollView{
                 LazyVStack{
                     ForEach(0 ..< 20, id: \.self){ _ in
@@ -43,9 +43,10 @@ struct MainMessageView: View {
         .overlay(alignment: .bottom, content: {
             buttonAdd
         })
-        .navigationBarHidden(true)
+        .navigationBarTitleDisplayMode(.inline)
+        .padding(.top, -44)
         .fullScreenCover(isPresented: $viewModel.isStatusSignOut) {
-            AuthView(isStatusLogin: $viewModel.isStatusSignOut)
+            AuthView()
         }
     }
 }
@@ -65,13 +66,12 @@ struct MainMessageView_Previews: PreviewProvider {
 extension MainMessageView {
     var customBar: some View {
         HStack{
-            //            Image(systemName: "person.fill")
-            //                .font(.system(size: 40))
-            //                .padding(.horizontal, 2)
             if let url = viewModel.userCurrent?.urlIMG {
-                ImageUserView(nameIMG: url, typeIMG: true, size: 75)
-            } else {
-                ImageUserView(nameIMG: "person.fill", typeIMG: true, size: 75)
+                if url != "" &&  url != " "{
+                    ImageUserView(nameIMG: url, typeIMG: true, size: 50)
+                } else {
+                    ImageUserView(nameIMG: "person.fill", typeIMG: false, size: 50)
+                }
             }
             
             
@@ -94,9 +94,11 @@ extension MainMessageView {
                 Image(systemName: "gear")
                     .font(.system(size: 20))
             }
+            .frame(width: 40, height: 40)
             .padding(.horizontal, 5)
+            
         }
-        .padding(.horizontal, 5)
+        .padding(.horizontal, 10)
         .actionSheet(isPresented: $showSignOutOptions) {
             ActionSheet(
                 title: Text("Settings"),
@@ -110,7 +112,7 @@ extension MainMessageView {
     
     var buttonAdd: some View {
         Button {
-            
+            isShowCreateNewMessage.toggle()
         } label: {
             HStack(alignment: .center){
                 Spacer()
@@ -123,6 +125,9 @@ extension MainMessageView {
             .background(.blue)
             .cornerRadius(30)
             .padding(.horizontal, 10)
+        }
+        .fullScreenCover(isPresented: $isShowCreateNewMessage) {
+            NewMassageView()
         }
     }
 }

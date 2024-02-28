@@ -17,7 +17,7 @@ struct AuthView: View {
     @State private var showImagePicker = false
     @State private var imageSelected: UIImage?
     
-    @Binding var isStatusLogin: Bool
+    @Environment(\.presentationMode) var presentationMode
     
     @ObservedObject var authViewModel = AuthViewModel()
     
@@ -49,7 +49,8 @@ struct AuthView: View {
                     if isLoginMode {
                         authViewModel.login(withEmail: email, passwd: passwd) { sucsess in
                             if sucsess {
-                                isStatusLogin = false
+                                //                                isStatusLogin = false
+                                presentationMode.wrappedValue.dismiss()
                             }
                         }
                     } else {
@@ -85,7 +86,7 @@ struct AuthView: View {
 struct AuthView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
-            AuthView(isStatusLogin: .constant(true))
+            AuthView()
         }
     }
 }

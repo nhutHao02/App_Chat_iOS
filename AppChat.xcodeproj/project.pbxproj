@@ -25,6 +25,9 @@
 		44B1FBFA2B8DD5D600BD867B /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B1FBF92B8DD5D600BD867B /* UserService.swift */; };
 		44B1FBFE2B8DDDED00BD867B /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 44B1FBFD2B8DDDED00BD867B /* FirebaseFirestoreSwift */; };
 		44B1FC002B8DE8FB00BD867B /* ImageUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B1FBFF2B8DE8FB00BD867B /* ImageUserView.swift */; };
+		44DA7F4F2B8F229D00A63FF3 /* NewMassageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA7F4E2B8F229D00A63FF3 /* NewMassageView.swift */; };
+		44DA7F512B8F22E500A63FF3 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA7F502B8F22E500A63FF3 /* SearchBarView.swift */; };
+		44DA7F532B8F34C300A63FF3 /* NewMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA7F522B8F34C300A63FF3 /* NewMessageViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +46,9 @@
 		44B1FBF72B8DD48900BD867B /* MainMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessageViewModel.swift; sourceTree = "<group>"; };
 		44B1FBF92B8DD5D600BD867B /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		44B1FBFF2B8DE8FB00BD867B /* ImageUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUserView.swift; sourceTree = "<group>"; };
+		44DA7F4E2B8F229D00A63FF3 /* NewMassageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMassageView.swift; sourceTree = "<group>"; };
+		44DA7F502B8F22E500A63FF3 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		44DA7F522B8F34C300A63FF3 /* NewMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +152,7 @@
 			children = (
 				4473AD032B8B290E0024E7A0 /* Components */,
 				4473AD042B8B29180024E7A0 /* Authentication */,
+				44DA7F4B2B8F225C00A63FF3 /* NewMessage */,
 				4430001A2B8D9B2D0042B855 /* MainMessage */,
 			);
 			path = Core;
@@ -157,6 +164,7 @@
 				44A4CEF52B8C8EEE00330658 /* ImagePicker */,
 				4473AD0A2B8B30870024E7A0 /* CustomTextFieldAuthView.swift */,
 				44B1FBFF2B8DE8FB00BD867B /* ImageUserView.swift */,
+				44DA7F502B8F22E500A63FF3 /* SearchBarView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -199,6 +207,31 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		44DA7F4B2B8F225C00A63FF3 /* NewMessage */ = {
+			isa = PBXGroup;
+			children = (
+				44DA7F4D2B8F228500A63FF3 /* ViewModel */,
+				44DA7F4C2B8F227B00A63FF3 /* View */,
+			);
+			path = NewMessage;
+			sourceTree = "<group>";
+		};
+		44DA7F4C2B8F227B00A63FF3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				44DA7F4E2B8F229D00A63FF3 /* NewMassageView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		44DA7F4D2B8F228500A63FF3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				44DA7F522B8F34C300A63FF3 /* NewMessageViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,9 +319,12 @@
 				4473ACF52B8B1D000024E7A0 /* ContentView.swift in Sources */,
 				4473AD0B2B8B30870024E7A0 /* CustomTextFieldAuthView.swift in Sources */,
 				44A4CEF42B8C8D7300330658 /* ImagePicker.swift in Sources */,
+				44DA7F532B8F34C300A63FF3 /* NewMessageViewModel.swift in Sources */,
+				44DA7F4F2B8F229D00A63FF3 /* NewMassageView.swift in Sources */,
 				4473ACF32B8B1D000024E7A0 /* AppChatApp.swift in Sources */,
 				44B1FBFA2B8DD5D600BD867B /* UserService.swift in Sources */,
 				4430001E2B8D9B6A0042B855 /* MainMessageView.swift in Sources */,
+				44DA7F512B8F22E500A63FF3 /* SearchBarView.swift in Sources */,
 				44B1FC002B8DE8FB00BD867B /* ImageUserView.swift in Sources */,
 				4473AD092B8B29D50024E7A0 /* AuthView.swift in Sources */,
 				443000192B8D917B0042B855 /* User.swift in Sources */,

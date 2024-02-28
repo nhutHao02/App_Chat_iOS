@@ -20,25 +20,25 @@ struct CustomTextFieldAuthView: View {
                     .scaledToFit()
                     .foregroundColor(.gray)
                     .frame(width: 25, height: 25)
-               if isSecure {
+                if isSecure {
                     SecureField(placeholder, text: $text)
-                       .font(.title2)
+                        .font(.title2)
                 } else {
                     TextField(placeholder, text: $text)
                         .font(.title2)
                 }
             }
             .padding(6)
-         }
+        }
         .background(.white)
         .cornerRadius(5)
-       
+        
     }
 }
 
 struct CustomTextFieldAuthView_Previews: PreviewProvider {
     static var previews: some View {
         CustomTextFieldAuthView(text: .constant(""), isSecure: true, iconName: "ss", placeholder: "ss")
-            
+        
     }
 }

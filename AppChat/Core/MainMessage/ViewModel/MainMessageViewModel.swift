@@ -23,7 +23,7 @@ class MainMessageViewModel: ObservableObject {
     }
     func fetchUser(){
         guard let uid = Auth.auth().currentUser?.uid else {return}
-    
+        
         self.service.fetchUser(withUid: uid) { user in
             self.userCurrent = user
         }

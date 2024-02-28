@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 import Firebase
 import UIKit
 import FirebaseStorage
@@ -23,7 +22,12 @@ class AuthViewModel: ObservableObject {
                 return
             }
             // uploaf image to Storage Firebase
-            self.uploadImageUser(withEmail: email, passwd: passwd, fullName: fullName, image: image)
+            if image != nil {
+                self.uploadImageUser(withEmail: email, passwd: passwd, fullName: fullName, image: image)
+            } else {
+                self.saveUserInfo(withEmail: email, passwd: passwd, fullName: fullName, url: "")
+            }
+            
             
             print("Successful create User uid: \(String(describing: result?.user.uid))")
             self.statusMessage = "Successful create User"
@@ -88,6 +92,6 @@ class AuthViewModel: ObservableObject {
             completion(true)
         }
     }
-
+    
 }
 

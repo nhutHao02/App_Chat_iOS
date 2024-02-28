@@ -21,4 +21,16 @@ struct UserService {
             comletion(user)
         }
     }
+    
+    func fetchUsers(completion: @escaping ([User]) -> Void) {
+        Firestore.firestore().collection("users").getDocuments { snapshot, error in
+            if let err = error {
+                print("Error when fetchUsers: \(err)")
+                return
+            }
+            guard let documents = try? snapshot?.documents else {return}
+            let users = documents.compactMap({ try? $0.data(as: User.self)})
+            completion(users)
+        }
+    }
 }
