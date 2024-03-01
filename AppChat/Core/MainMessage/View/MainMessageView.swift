@@ -10,34 +10,18 @@ import SwiftUI
 struct MainMessageView: View {
     @State var showSignOutOptions = false
     @State var isShowCreateNewMessage = false
+    @State var isNavigateToChatLogView = false
+    @State var userChatSelected:User?
+    
     @ObservedObject var viewModel = MainMessageViewModel()
+    
     var body: some View {
         VStack{
             // custom bar
             customBar
-            ScrollView{
-                LazyVStack{
-                    ForEach(0 ..< 20, id: \.self){ _ in
-                        HStack{
-                            Image(systemName: "person.fill")
-                                .font(.system(size: 34))
-                                .overlay(Circle().stroke(Color(.label), lineWidth: 1))
-                            VStack(alignment: .leading, spacing: 4){
-                                Text("User Name")
-                                    .font(.system(size: 16))
-                                    .bold()
-                                Text("This was message to user")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(Color(.lightGray))
-                            }
-                            Spacer()
-                            Text("22d")
-                        }
-                        Divider()
-                    }
-                    .padding(.horizontal, 10)
-                }
-                .padding(.bottom, 40)
+            messageHistory
+            NavigationLink("", isActive: $isNavigateToChatLogView) {
+                ChatLogView(user: userChatSelected)
             }
         }
         .overlay(alignment: .bottom, content: {
@@ -57,10 +41,10 @@ struct MainMessageView_Previews: PreviewProvider {
         NavigationView{
             MainMessageView()
         }
-        NavigationView{
-            MainMessageView()
-                .preferredColorScheme(.dark)
-        }
+//        NavigationView{
+//            MainMessageView()
+//                .preferredColorScheme(.dark)
+//        }
     }
 }
 extension MainMessageView {
@@ -73,8 +57,7 @@ extension MainMessageView {
                     ImageUserView(nameIMG: "person.fill", typeIMG: false, size: 50)
                 }
             }
-            
-            
+
             VStack(alignment: .leading, spacing: 2){
                 Text(viewModel.userCurrent?.fullName ?? " ")
                     .font(.system(size: 24))
@@ -88,15 +71,12 @@ extension MainMessageView {
                 }
             }
             Spacer()
-            Button {
-                showSignOutOptions.toggle()
-            } label: {
-                Image(systemName: "gear")
-                    .font(.system(size: 20))
-            }
-            .frame(width: 40, height: 40)
-            .padding(.horizontal, 5)
-            
+                Button {
+                    showSignOutOptions.toggle()
+                } label: {
+                    Image(systemName: "gear")
+                        .font(.system(size: 25))
+                }
         }
         .padding(.horizontal, 10)
         .actionSheet(isPresented: $showSignOutOptions) {
@@ -127,7 +107,37 @@ extension MainMessageView {
             .padding(.horizontal, 10)
         }
         .fullScreenCover(isPresented: $isShowCreateNewMessage) {
-            NewMassageView()
+            NewMassageView { user in
+                userChatSelected = user
+                isNavigateToChatLogView = true
+            }
         }
+    }
+    var messageHistory: some View {
+        ScrollView{
+            LazyVStack{
+                ForEach(0 ..< 20, id: \.self){ _ in
+                    HStack{
+                        Image(systemName: "person.fill")
+                            .font(.system(size: 34))
+                            .overlay(Circle().stroke(Color(.label), lineWidth: 1))
+                        VStack(alignment: .leading, spacing: 4){
+                            Text("User Name")
+                                .font(.system(size: 16))
+                                .bold()
+                            Text("This was message to user")
+                                .font(.system(size: 14))
+                                .foregroundColor(Color(.lightGray))
+                        }
+                        Spacer()
+                        Text("22d")
+                    }
+                    Divider()
+                }
+                .padding(.horizontal, 10)
+            }
+            .padding(.bottom, 40)
+        }
+
     }
 }

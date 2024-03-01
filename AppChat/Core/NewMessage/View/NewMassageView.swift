@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NewMassageView: View {
+    let didUserSelected: (User) -> (Void)
     @ObservedObject var viewModel = NewMessageViewModel()
     
     @Environment(\.presentationMode) var presentationMode
@@ -34,22 +35,27 @@ struct NewMassageView: View {
             
             SearchBarView(text: $viewModel.searchText)
                 .padding(.horizontal, 10)
-            
             ScrollView{
                 LazyVStack{
                     ForEach(viewModel.searchedUser) { user in
-                        HStack(alignment: .center){
-                            if let url = user.urlIMG {
-                                if url != "" &&  url != " "{
-                                    ImageUserView(nameIMG: url, typeIMG: true, size: 50)
-                                } else {
-                                    ImageUserView(nameIMG: "person.fill", typeIMG: false, size: 50)
+                        Button {
+                            didUserSelected(user)
+                            presentationMode.wrappedValue.dismiss()
+                        } label: {
+                            HStack(alignment: .center){
+                                if let url = user.urlIMG {
+                                    if url != "" &&  url != " "{
+                                        ImageUserView(nameIMG: url, typeIMG: true, size: 50)
+                                    } else {
+                                        ImageUserView(nameIMG: "person.fill", typeIMG: false, size: 50)
+                                    }
                                 }
+                                Text(user.fullName)
+                                Spacer()
                             }
-                            Text(user.fullName)
-                            Spacer()
+                            .padding(.horizontal, 5)
                         }
-                        .padding(.horizontal, 5)
+                        .foregroundColor(Color(.label))
                     }
                 }
                 .padding(.horizontal, 15)
@@ -62,6 +68,7 @@ struct NewMassageView: View {
 
 struct NewMassageView_Previews: PreviewProvider {
     static var previews: some View {
-        NewMassageView()
+//        NewMassageView()
+        MainMessageView()
     }
 }
