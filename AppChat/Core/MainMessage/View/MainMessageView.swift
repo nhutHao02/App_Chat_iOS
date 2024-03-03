@@ -41,10 +41,10 @@ struct MainMessageView_Previews: PreviewProvider {
         NavigationView{
             MainMessageView()
         }
-//        NavigationView{
-//            MainMessageView()
-//                .preferredColorScheme(.dark)
-//        }
+        //        NavigationView{
+        //            MainMessageView()
+        //                .preferredColorScheme(.dark)
+        //        }
     }
 }
 extension MainMessageView {
@@ -57,7 +57,7 @@ extension MainMessageView {
                     ImageUserView(nameIMG: "person.fill", typeIMG: false, size: 50)
                 }
             }
-
+            
             VStack(alignment: .leading, spacing: 2){
                 Text(viewModel.userCurrent?.fullName ?? " ")
                     .font(.system(size: 24))
@@ -71,12 +71,12 @@ extension MainMessageView {
                 }
             }
             Spacer()
-                Button {
-                    showSignOutOptions.toggle()
-                } label: {
-                    Image(systemName: "gear")
-                        .font(.system(size: 25))
-                }
+            Button {
+                showSignOutOptions.toggle()
+            } label: {
+                Image(systemName: "gear")
+                    .font(.system(size: 25))
+            }
         }
         .padding(.horizontal, 10)
         .actionSheet(isPresented: $showSignOutOptions) {
@@ -116,21 +116,40 @@ extension MainMessageView {
     var messageHistory: some View {
         ScrollView{
             LazyVStack{
-                ForEach(0 ..< 20, id: \.self){ _ in
+                if viewModel.recentMessages.count == 0 {
+                    Text("You haven't messaged anyone yet, create a new message.")
+                        .font(.system(size: 20))
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(Color(.darkGray))
+                        .padding()
+                    
+                }
+                ForEach(viewModel.recentMessages){ recentMessage in
                     HStack{
-                        Image(systemName: "person.fill")
-                            .font(.system(size: 34))
-                            .overlay(Circle().stroke(Color(.label), lineWidth: 1))
+                        if recentMessage.urlIMG.trimmingCharacters(in: .whitespaces) == "" {
+                            ImageUserView(nameIMG: "person.fill", typeIMG: false, size: 45)
+                        } else {
+                            ImageUserView(nameIMG: recentMessage.urlIMG, typeIMG: true, size: 45)
+                        }
+                        
                         VStack(alignment: .leading, spacing: 4){
-                            Text("User Name")
+                            Text(recentMessage.fullName)
                                 .font(.system(size: 16))
                                 .bold()
-                            Text("This was message to user")
+                            Text(recentMessage.textRecent)
                                 .font(.system(size: 14))
                                 .foregroundColor(Color(.lightGray))
+                                .lineLimit(1)
+                                .truncationMode(.tail)
                         }
                         Spacer()
-                        Text("22d")
+                        Text(viewModel.calculatorDateRecent(time: recentMessage.timestamp))
+                    }
+                    .onTapGesture {
+                        viewModel.fetchUser(uid: recentMessage.toUid) { user in
+                            userChatSelected = user
+                            isNavigateToChatLogView = true
+                        }
                     }
                     Divider()
                 }
@@ -138,6 +157,6 @@ extension MainMessageView {
             }
             .padding(.bottom, 40)
         }
-
+        
     }
 }

@@ -21,7 +21,6 @@ struct AuthView: View {
     
     @ObservedObject var authViewModel = AuthViewModel()
     
-    
     var body: some View {
         ScrollView{
             VStack{

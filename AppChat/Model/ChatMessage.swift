@@ -8,8 +8,8 @@
 import Foundation
 import Firebase
 import FirebaseFirestoreSwift
-struct ChatMessage: Decodable, Identifiable{
+struct ChatMessage: Decodable, Identifiable, Hashable{
     @DocumentID var id: String?
-    let fromUid, toUid, content: String
+    let fromUid, toUid, content, urlImgMess: String
     let timestamp: Timestamp
 }

@@ -10,7 +10,6 @@ import Firebase
 import FirebaseFirestoreSwift
 struct UserService {
     func fetchUser(withUid uid: String, comletion: @escaping (User) -> Void) {
-        
         Firestore.firestore().collection("users").document(uid).getDocument { snapshot, error in
             if let err = error {
                 print("Failed fetchUser with error: \(err)")

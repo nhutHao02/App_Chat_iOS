@@ -9,9 +9,11 @@ import SwiftUI
 
 struct NewMassageView: View {
     let didUserSelected: (User) -> (Void)
+    
     @ObservedObject var viewModel = NewMessageViewModel()
     
     @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         VStack(){
             // toolbar
@@ -68,7 +70,7 @@ struct NewMassageView: View {
 
 struct NewMassageView_Previews: PreviewProvider {
     static var previews: some View {
-//        NewMassageView()
+        //        NewMassageView()
         MainMessageView()
     }
 }

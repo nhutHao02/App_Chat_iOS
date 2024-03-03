@@ -11,6 +11,5 @@ struct User: Decodable, Identifiable {
     @DocumentID var id: String?
     let uid, email, fullName, pass: String
     let urlIMG: String?
-    
 }
 

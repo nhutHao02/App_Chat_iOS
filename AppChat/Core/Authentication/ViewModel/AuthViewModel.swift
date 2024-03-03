@@ -28,7 +28,6 @@ class AuthViewModel: ObservableObject {
                 self.saveUserInfo(withEmail: email, passwd: passwd, fullName: fullName, url: "")
             }
             
-            
             print("Successful create User uid: \(String(describing: result?.user.uid))")
             self.statusMessage = "Successful create User"
             self.isShowAler = true

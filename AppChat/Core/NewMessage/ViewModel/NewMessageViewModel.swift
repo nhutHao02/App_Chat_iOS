@@ -26,6 +26,7 @@ class NewMessageViewModel: ObservableObject {
     init() {
         self.fetchUsers()
     }
+    
     func fetchUsers() {
         self.service.fetchUsers { users in
             self.users = users

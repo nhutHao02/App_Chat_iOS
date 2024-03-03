@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		443000192B8D917B0042B855 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443000182B8D917B0042B855 /* User.swift */; };
 		4430001E2B8D9B6A0042B855 /* MainMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4430001D2B8D9B6A0042B855 /* MainMessageView.swift */; };
+		445521AF2B94893900544B1C /* MessageImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445521AE2B94893900544B1C /* MessageImageView.swift */; };
+		445521B12B948A0600544B1C /* MessageTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445521B02B948A0600544B1C /* MessageTextView.swift */; };
 		4473ACF32B8B1D000024E7A0 /* AppChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4473ACF22B8B1D000024E7A0 /* AppChatApp.swift */; };
 		4473ACF52B8B1D000024E7A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4473ACF42B8B1D000024E7A0 /* ContentView.swift */; };
 		4473ACF72B8B1D020024E7A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4473ACF62B8B1D020024E7A0 /* Assets.xcassets */; };
@@ -28,6 +30,7 @@
 		44B1FBFA2B8DD5D600BD867B /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B1FBF92B8DD5D600BD867B /* UserService.swift */; };
 		44B1FBFE2B8DDDED00BD867B /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 44B1FBFD2B8DDDED00BD867B /* FirebaseFirestoreSwift */; };
 		44B1FC002B8DE8FB00BD867B /* ImageUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B1FBFF2B8DE8FB00BD867B /* ImageUserView.swift */; };
+		44B422A52B92F3A400E4F4CB /* RecentMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B422A42B92F3A300E4F4CB /* RecentMessage.swift */; };
 		44DA7F4F2B8F229D00A63FF3 /* NewMassageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA7F4E2B8F229D00A63FF3 /* NewMassageView.swift */; };
 		44DA7F512B8F22E500A63FF3 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA7F502B8F22E500A63FF3 /* SearchBarView.swift */; };
 		44DA7F532B8F34C300A63FF3 /* NewMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DA7F522B8F34C300A63FF3 /* NewMessageViewModel.swift */; };
@@ -36,6 +39,8 @@
 /* Begin PBXFileReference section */
 		443000182B8D917B0042B855 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4430001D2B8D9B6A0042B855 /* MainMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessageView.swift; sourceTree = "<group>"; };
+		445521AE2B94893900544B1C /* MessageImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageImageView.swift; sourceTree = "<group>"; };
+		445521B02B948A0600544B1C /* MessageTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTextView.swift; sourceTree = "<group>"; };
 		4473ACEF2B8B1D000024E7A0 /* AppChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4473ACF22B8B1D000024E7A0 /* AppChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppChatApp.swift; sourceTree = "<group>"; };
 		4473ACF42B8B1D000024E7A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -52,6 +57,7 @@
 		44B1FBF72B8DD48900BD867B /* MainMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessageViewModel.swift; sourceTree = "<group>"; };
 		44B1FBF92B8DD5D600BD867B /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		44B1FBFF2B8DE8FB00BD867B /* ImageUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUserView.swift; sourceTree = "<group>"; };
+		44B422A42B92F3A300E4F4CB /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
 		44DA7F4E2B8F229D00A63FF3 /* NewMassageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMassageView.swift; sourceTree = "<group>"; };
 		44DA7F502B8F22E500A63FF3 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		44DA7F522B8F34C300A63FF3 /* NewMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageViewModel.swift; sourceTree = "<group>"; };
@@ -95,6 +101,15 @@
 				44B1FBF72B8DD48900BD867B /* MainMessageViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		445521AD2B94891600544B1C /* MessChatLog */ = {
+			isa = PBXGroup;
+			children = (
+				445521AE2B94893900544B1C /* MessageImageView.swift */,
+				445521B02B948A0600544B1C /* MessageTextView.swift */,
+			);
+			path = MessChatLog;
 			sourceTree = "<group>";
 		};
 		4473ACE62B8B1D000024E7A0 = {
@@ -150,6 +165,7 @@
 			children = (
 				443000182B8D917B0042B855 /* User.swift */,
 				4491FA972B91DB4A00795AEA /* ChatMessage.swift */,
+				44B422A42B92F3A300E4F4CB /* RecentMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -169,6 +185,7 @@
 		4473AD032B8B290E0024E7A0 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				445521AD2B94891600544B1C /* MessChatLog */,
 				44A4CEF52B8C8EEE00330658 /* ImagePicker */,
 				4473AD0A2B8B30870024E7A0 /* CustomTextFieldAuthView.swift */,
 				44B1FBFF2B8DE8FB00BD867B /* ImageUserView.swift */,
@@ -347,8 +364,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				445521AF2B94893900544B1C /* MessageImageView.swift in Sources */,
+				445521B12B948A0600544B1C /* MessageTextView.swift in Sources */,
 				4491FA982B91DB4A00795AEA /* ChatMessage.swift in Sources */,
 				44B1FBF82B8DD48900BD867B /* MainMessageViewModel.swift in Sources */,
+				44B422A52B92F3A400E4F4CB /* RecentMessage.swift in Sources */,
 				4473AD0D2B8B385C0024E7A0 /* AuthViewModel.swift in Sources */,
 				4473ACF52B8B1D000024E7A0 /* ContentView.swift in Sources */,
 				4473AD0B2B8B30870024E7A0 /* CustomTextFieldAuthView.swift in Sources */,
