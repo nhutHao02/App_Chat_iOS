@@ -50,27 +50,34 @@ struct MainMessageView_Previews: PreviewProvider {
 extension MainMessageView {
     var customBar: some View {
         HStack{
-            if let url = viewModel.userCurrent?.urlIMG {
-                if url != "" &&  url != " "{
-                    ImageUserView(nameIMG: url, typeIMG: true, size: 50)
-                } else {
-                    ImageUserView(nameIMG: "person.fill", typeIMG: false, size: 50)
-                }
-            }
-            
-            VStack(alignment: .leading, spacing: 2){
-                Text(viewModel.userCurrent?.fullName ?? " ")
-                    .font(.system(size: 24))
-                    .bold()
+            NavigationLink {
+                ProfileView(user: viewModel.userCurrent)
+            } label: {
                 HStack{
-                    Circle()
-                        .frame(width: 10, height: 10)
-                        .foregroundColor(.green)
-                    Text("Online")
-                        .font(.system(size: 12))
+                    if let url = viewModel.userCurrent?.urlIMG {
+                        if url != "" &&  url != " "{
+                            ImageUserView(nameIMG: url, typeIMG: true, size: 50)
+                        } else {
+                            ImageUserView(nameIMG: "person.fill", typeIMG: false, size: 50)
+                        }
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 2){
+                        Text(viewModel.userCurrent?.fullName ?? " ")
+                            .foregroundColor(Color(.label))
+                            .font(.system(size: 24))
+                            .bold()
+                        HStack{
+                            Circle()
+                                .frame(width: 10, height: 10)
+                                .foregroundColor(.green)
+                            Text("Online")
+                                .font(.system(size: 12))
+                        }
+                    }
                 }
+                Spacer()
             }
-            Spacer()
             Button {
                 showSignOutOptions.toggle()
             } label: {
